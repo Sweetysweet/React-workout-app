@@ -1,0 +1,51 @@
+.exercise {
+    display: flex;
+    font-size: 1rem;
+    border-top: 1px solid rgba(0,0,0,.1);
+    background-color: #fff;
+    -webkit-user-select: none;
+    user-select: none;
+    padding: 1em;
+    align-items: center;
+  }
+  
+  .exercise.completed * {
+    color: lightgray;
+    transition: color .2s;
+  }
+  
+  .exercise.completed .exercise-title {
+    text-decoration: line-through;
+  }
+  
+  .exercise .exercise-title {
+    margin-right: auto;
+  }
+  
+  .exercise .checkbox {
+    margin-right: .5rem;
+  }
+  
+  .exercise button:not(.checkbox) {
+    opacity: 0;
+    transition: all .2s;
+  }
+  
+  .exercise:hover button:not(.checkbox) {
+    opacity: 1;
+  }
+  
+  .exercise-edit-form {
+    display: flex;
+    font-size: 1rem;
+    padding: .85em;
+    border-top: 1px solid rgba(0,0,0,.1);
+  }
+  
+  .exercise-edit-form input {
+    flex: 1;
+  }
+  
+  .exercise-edit-form .save {
+    margin-left: .5em;
+  }
