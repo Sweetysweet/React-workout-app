@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 
-export default function Form({ onAdd }) {
+export default function Form({ onSubmit }) {
     const [title, setTitle] = React.useState('');
 
     function handleSubmit(event) {
         event.preventDefault();
 
         if (title) {
-            onAdd(title);
+            onSubmit(title);
             setTitle('');
         }
     }
@@ -20,18 +20,22 @@ export default function Form({ onAdd }) {
     }
         
     return (
-        <form className="exercise-add-form" onSubmit={handleSubmit}>
+        <form 
+            className="exercise-add-form" 
+            onSubmit={handleSubmit}
+        >
             <input
                 type="text"
                 value={title}
                 placeholder="Что нужно сделать?"
-                onChange={handleChange} />
+                onChange={handleChange} 
+            />
                 
             <Button type="submit" disabled={!title}>Добавить</Button>
         </form>
     );
 }
 
-Form.propTypes = {
-    onAdd: PropTypes.func.isRequired
-};
+// Form.propTypes = {
+//     onAdd: PropTypes.func.isRequired
+// };

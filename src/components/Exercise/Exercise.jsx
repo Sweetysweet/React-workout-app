@@ -6,6 +6,7 @@ import Button from '../Button';
 export default function Exercise({ 
     exercise,
     completed,
+    onAddSet,
     onEdit,
     onDelete,
     onToggle
@@ -28,6 +29,10 @@ export default function Exercise({
         setEditing(false);
     }
 
+    function handleAddSet() {
+        onAddSet(exercise.id);
+    }
+
     function handleDelete() {
         onDelete(exercise.id);
     }
@@ -39,6 +44,8 @@ export default function Exercise({
     function handleEdit() {
         setEditing(true);
     }
+
+    console.log(exercise.sets)
 
     if (editing) {
         return (
@@ -53,14 +60,22 @@ export default function Exercise({
                 ref={inputRef}
                 className={className}
             >
-                {/* {<span className="exercise-title">{exercise.title}</span>} */}
+                <div className="exercise-details">
+                    <span className="exercise-title">{exercise.title}</span>
     
-                <Button className="edit icon" icon="edit" onClick={handleEdit} />
-                <Button className="delete icon" icon="delete" onClick={handleDelete} />
+                    <Button className="add icon" icon="add" onClick={handleAddSet} />
+                    <Button className="edit icon" icon="edit" onClick={handleEdit} />
+                    <Button className="delete icon" icon="delete" onClick={handleDelete} />
+                </div>
+
+                <ul className="exercise-set-list">
+                    {exercise.sets.map(set => 
+                        <li>{set.weight} кг. {set.reps}</li>    
+                    )}
+                </ul>
             </div>
         );
-    }
-    
+    }   
 }
 
 // Exercise.propTypes = {

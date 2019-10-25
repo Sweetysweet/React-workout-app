@@ -16,6 +16,6 @@ export default function Header({title}) {
     );
 }
 
-Header.propTypes = {
-    todos: PropTypes.array.isRequired
-};
+// Header.propTypes = {
+//     todos: PropTypes.array.isRequired
+// };
