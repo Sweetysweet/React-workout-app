@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../Button';
+import ExerciseSetItem from '../ExerciseSetItem';
 
 export default function Exercise({ 
     exercise,
     completed,
-    onAddSet,
     onEdit,
     onDelete,
-    onToggle
+    onAddSet,
+    onUpdateSet,
+    onDeleteSet
 }) {
     const inputRef = React.useRef();
     const [editing, setEditing] = React.useState(false);
@@ -34,17 +36,20 @@ export default function Exercise({
     }
 
     function handleDelete() {
-        onDelete(exercise.id);
-    }
-
-    function handleToggle() {
-        onToggle(exercise.id);
+       onDelete(exercise.id);
     }
 
     function handleEdit() {
         setEditing(true);
     }
 
+    function handleUpdateSet(setId, data) {
+        onUpdateSet(exercise.id, setId, data);
+    }
+
+    function handleDeleteSet(setId) {
+        onDeleteSet(exercise.id, setId);
+    }
     console.log(exercise.sets)
 
     if (editing) {
@@ -70,7 +75,12 @@ export default function Exercise({
 
                 <ul className="exercise-set-list">
                     {exercise.sets.map(set => 
-                        <li>{set.weight} кг. {set.reps}</li>    
+                        <ExerciseSetItem
+                            key = {set.id}
+                            set = {set}
+                            onUpdate = {handleUpdateSet}
+                            onDelete = {handleDeleteSet}
+                        />      
                     )}
                 </ul>
             </div>

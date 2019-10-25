@@ -3,14 +3,23 @@ import PropTypes from 'prop-types';
 
 import Exercise from '../Exercise';
 
-function List({exercises, onAddSet, ...props}) {
+function List({
+    exercises,
+    onDeleteExercise,
+    onAddSet, 
+    onUpdateSet,
+    onDeleteSet
+}) {
     return (
         <section className="exercise-list">
                 {exercises.map((exercise, index) =>
                     <Exercise
-                        key={exercise}
+                        key={exercise.id}
                         exercise={exercise}
+                        onDelete={onDeleteExercise}
                         onAddSet={onAddSet}
+                        onUpdateSet={onUpdateSet}
+                        onDeleteSet={onDeleteSet}
                     />)
                 }
         </section>
