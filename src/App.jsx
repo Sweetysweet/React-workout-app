@@ -22,13 +22,27 @@ export default function App() {
         setExercises([...exercises, exercise]);
     }
 
+    //редактирование упражнения
+    
+    function handleUpdateExercise(exerciseId, data) {
+        setExercises(exercises.map(exercise => {
+            if (exercise.id !== exerciseId) return exercise;
+
+            return {
+                ...exercise,
+                ...data
+            };
+        }))
+    }
+
     //удаление упражнения
 
     function handleDeleteExercise(exerciseId) {
         setExercises(exercises.filter(exercise => exercise.id !== exerciseId));
     }
 
-    //добавление сета
+    //добавление сета к упражнению
+
     function handleAddSet(exerciseId) {
         setExercises(exercises.map(exercise => {
             if (exercise.id !== exerciseId) return exercise;
@@ -53,7 +67,8 @@ export default function App() {
     }
 
 
-    //добавление упражнения
+    //добавление нового сета
+
     function handleUpdateSet(exerciseId, setId, data) {
         setExercises(exercises.map(exercise => {
             if (exercise.id !== exerciseId) return exercise;
@@ -72,6 +87,7 @@ export default function App() {
         }));
     }
     //удаление сета
+
     function handleDeleteSet(exerciseId, setId) {
         setExercises(exercises.map(exercise => {
             if (exercise.id !== exerciseId) return exercise;
@@ -85,10 +101,14 @@ export default function App() {
 
     return (
         <main>
-            <Header title="React Workout"/>
+            <Header 
+                title="React Workout"
+                exercises={exercises}
+            />
 
             <List 
                 exercises={exercises} 
+                onUpdateExercise={handleUpdateExercise}
                 onAddSet={handleAddSet}
                 onDeleteExercise={handleDeleteExercise}
                 onUpdateSet={handleUpdateSet}

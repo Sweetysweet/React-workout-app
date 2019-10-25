@@ -5,6 +5,7 @@ import Exercise from '../Exercise';
 
 function List({
     exercises,
+    onUpdateExercise,
     onDeleteExercise,
     onAddSet, 
     onUpdateSet,
@@ -12,10 +13,11 @@ function List({
 }) {
     return (
         <section className="exercise-list">
-                {exercises.map((exercise, index) =>
+                {exercises.map(exercise =>
                     <Exercise
                         key={exercise.id}
                         exercise={exercise}
+                        onUpdate={onUpdateExercise}
                         onDelete={onDeleteExercise}
                         onAddSet={onAddSet}
                         onUpdateSet={onUpdateSet}

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import Stats from '../Stats';
 import Stopwatch from '../Stopwatch';
 
-export default function Header({title}) {
+export default function Header({title, exercises}) {
     return (
         <header>
-            <Stats todos={[]} />
+            <Stats exercises={exercises} />
             
             <h1>{title}</h1>
             

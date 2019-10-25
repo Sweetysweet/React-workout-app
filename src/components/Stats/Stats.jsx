@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Stats(props) {
-    const total = props.todos.length;
-    const completed = props.todos.filter(todo => todo.completed).length;
+export default function Stats( {exercises} ) {
+    const total = exercises.length;
+    const completed = exercises.filter(todo => todo.completed).length;
     const uncompleted = total - completed;
 
     return (
         <table className="stats">
             <tbody>
                 <tr>
-                    <th>Всего задач:</th>
+                    <th>Всего упражнений:</th>
                     <td>{total}</td>
                 </tr>
                 <tr>
@@ -33,5 +33,3 @@ Stats.propTypes = {
         completed: PropTypes.bool.isRequired
     })).isRequired
 };
-
-export default Stats;

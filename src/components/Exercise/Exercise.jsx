@@ -7,7 +7,7 @@ import ExerciseSetItem from '../ExerciseSetItem';
 export default function Exercise({ 
     exercise,
     completed,
-    onEdit,
+    onUpdate,
     onDelete,
     onAddSet,
     onUpdateSet,
@@ -26,7 +26,7 @@ export default function Exercise({
     function handleSubmit(event) {
         event.preventDefault();
         
-        onEdit(exercise.id, inputRef.current.value);
+        onUpdate(exercise.id, { title: inputRef.current.value });
         
         setEditing(false);
     }
@@ -55,16 +55,13 @@ export default function Exercise({
     if (editing) {
         return (
             <form className="exercise-edit-form" onSubmit={handleSubmit}>
-                <input type="text" ref="title" defaultValue={exercise.title} />
+                <input ref={inputRef} type="text" defaultValue={exercise.title} />
                 <Button className="save icon" icon="save" type="submit" />
             </form>
         );
     } else {
         return (
-            <div 
-                ref={inputRef}
-                className={className}
-            >
+            <div className={className}>
                 <div className="exercise-details">
                     <span className="exercise-title">{exercise.title}</span>
     
