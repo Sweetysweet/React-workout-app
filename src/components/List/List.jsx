@@ -1,10 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import Exercise from '../Exercise';
 
 function List({
     exercises,
+    selectedExercise,
+
+    onSelectExercise,
     onUpdateExercise,
     onDeleteExercise,
     onAddSet, 
@@ -17,6 +20,8 @@ function List({
                     <Exercise
                         key={exercise.id}
                         exercise={exercise}
+                        selected={exercise.id === selectedExercise.id}
+                        onSelect={onSelectExercise}
                         onUpdate={onUpdateExercise}
                         onDelete={onDeleteExercise}
                         onAddSet={onAddSet}

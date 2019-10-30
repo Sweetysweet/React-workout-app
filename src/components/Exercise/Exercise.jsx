@@ -1,12 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import ExerciseSetItem from '../ExerciseSetItem';
 
 export default function Exercise({ 
     exercise,
-    completed,
+    selected,
+
+    onSelect,
     onUpdate,
     onDelete,
     onAddSet,
@@ -15,7 +17,7 @@ export default function Exercise({
 }) {
     const inputRef = React.useRef();
     const [editing, setEditing] = React.useState(false);
-    const className = `exercise${completed ? ' completed' : ''}`;
+    const className = `exercise${selected ? ' selected' : ''}`;
 
     React.useEffect(() => {
         if (editing) {
@@ -29,6 +31,10 @@ export default function Exercise({
         onUpdate(exercise.id, { title: inputRef.current.value });
         
         setEditing(false);
+    }
+
+    function handleSelect() {
+        onSelect(exercise.id);
     }
 
     function handleAddSet() {
@@ -54,32 +60,58 @@ export default function Exercise({
 
     if (editing) {
         return (
-            <form className="exercise-edit-form" onSubmit={handleSubmit}>
-                <input ref={inputRef} type="text" defaultValue={exercise.title} />
-                <Button className="save icon" icon="save" type="submit" />
+            <form 
+                className="exercise-edit-form" 
+                onSubmit={handleSubmit}
+            >
+                <input 
+                    ref={inputRef} 
+                    type="text" 
+                    defaultValue={exercise.title} 
+                />
+                <Button 
+                    className="save icon" 
+                    icon="save" 
+                    type="submit" 
+                />
             </form>
         );
     } else {
         return (
-            <div className={className}>
+            <div className={className} onClick={handleSelect}>
                 <div className="exercise-details">
                     <span className="exercise-title">{exercise.title}</span>
     
-                    <Button className="add icon" icon="add" onClick={handleAddSet} />
-                    <Button className="edit icon" icon="edit" onClick={handleEdit} />
-                    <Button className="delete icon" icon="delete" onClick={handleDelete} />
+                    <Button 
+                        className="add icon" 
+                        icon="add" 
+                        onClick={handleAddSet} 
+                    />
+                    <Button 
+                        className="edit icon" 
+                        icon="edit" 
+                        onClick={handleEdit} 
+                    />
+                    <Button 
+                        className="delete icon" 
+                        icon="delete" 
+                        onClick={handleDelete} 
+                    />
                 </div>
 
-                <ul className="exercise-set-list">
-                    {exercise.sets.map(set => 
-                        <ExerciseSetItem
-                            key = {set.id}
-                            set = {set}
-                            onUpdate = {handleUpdateSet}
-                            onDelete = {handleDeleteSet}
-                        />      
-                    )}
-                </ul>
+                {selected &&
+                    <ul className="exercise-set-list">
+                        {exercise.sets.map(set => 
+                            <ExerciseSetItem
+                                key = {set.id}
+                                set = {set}
+                                onSelect={handleSelect}
+                                onUpdate = {handleUpdateSet}
+                                onDelete = {handleDeleteSet}
+                            />      
+                        )}
+                    </ul>
+                }
             </div>
         );
     }   

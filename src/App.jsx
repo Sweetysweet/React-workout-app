@@ -5,9 +5,9 @@ import Form from './components/Form';
 import List from './components/List';
 
 import data from './data/exercises.json';
-import Exercise from './components/Exercise';
 
 export default function App() {
+    const [selectedExercise, setselectedExercise] = React.useState({});
     const [exercises, setExercises] = React.useState(data);
 
     function handleSubmit(title) {
@@ -20,6 +20,15 @@ export default function App() {
         };
         //имеющиеся упражнения + новые
         setExercises([...exercises, exercise]);
+    }
+
+    //Выбор упражнения
+
+    function handleSelectExercise(exerciseId) {
+        const exercise = exercises.find(exercise =>
+        exercise.id === exerciseId);
+
+        setselectedExercise(exercise);
     }
 
     //редактирование упражнения
@@ -108,6 +117,8 @@ export default function App() {
 
             <List 
                 exercises={exercises} 
+                selectedExercise={selectedExercise}
+                onSelectExercise={handleSelectExercise}
                 onUpdateExercise={handleUpdateExercise}
                 onAddSet={handleAddSet}
                 onDeleteExercise={handleDeleteExercise}

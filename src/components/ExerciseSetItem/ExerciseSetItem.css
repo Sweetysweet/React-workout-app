@@ -1,0 +1,12 @@
+.exercise-set-form,
+.exercise-set-item {
+    display: flex;
+    align-items: center;
+}
+
+.exercise-set-item .buttons,
+.exercise-set-form .buttons {
+    margin-left: auto;
+}
+
+

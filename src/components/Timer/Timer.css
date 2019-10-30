@@ -1,13 +1,13 @@
-.stopwatch {
+.timer {
   padding: 15px 10px 5px 10px;
 }
 
-.stopwatch-time {
+.timer-time {
   font-family: monospace;
   font-size: 2em;
 }
 
-.stopwatch-controls button {
+.timer-controls button {
   margin: 5px;
   color: white;
 }

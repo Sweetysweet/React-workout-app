@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import Stats from '../Stats';
-import Stopwatch from '../Stopwatch';
+import Timer from '../Timer';
 
 export default function Header({title, exercises}) {
     return (
@@ -11,7 +11,7 @@ export default function Header({title, exercises}) {
             
             <h1>{title}</h1>
             
-            <Stopwatch />
+            <Timer />
         </header>
     );
 }

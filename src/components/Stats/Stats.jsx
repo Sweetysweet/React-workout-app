@@ -1,35 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
-export default function Stats( {exercises} ) {
-    const total = exercises.length;
-    const completed = exercises.filter(todo => todo.completed).length;
-    const uncompleted = total - completed;
+export default function Stats( { exercises } ) {
+    const weight = exercises.reduce((total, exercise) => 
+        total + exercise.sets.reduce((total, set) => total + set.weight, 0),
+    0);
 
     return (
         <table className="stats">
             <tbody>
                 <tr>
-                    <th>Всего упражнений:</th>
-                    <td>{total}</td>
+                    <th>Упражнений:</th>
+                    <td>{exercises.length}</td>
                 </tr>
                 <tr>
-                    <th>Выполнено:</th>
-                    <td>{completed}</td>
+                    <th>Общий вес, кг:</th>
+                    <td>{weight}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                     <th>Осталось:</th>
                     <td>{uncompleted}</td>
-                </tr>
+                </tr> */}
             </tbody>
         </table>
     );
 }
 
-Stats.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        completed: PropTypes.bool.isRequired
-    })).isRequired
-};
+// Stats.propTypes = {
+//     todos: PropTypes.arrayOf(PropTypes.shape({
+//         id: PropTypes.number.isRequired,
+//         title: PropTypes.string.isRequired,
+//         completed: PropTypes.bool.isRequired
+//     })).isRequired
+// };

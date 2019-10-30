@@ -1,9 +1,14 @@
 import React from 'react';
 import Button from '../Button';
 
-export default function ExerciseSetList({ set, onUpdate, onDelete }) {
+export default function ExerciseSetList({ 
+    set,
+    onUpdate,
+    onDelete 
+}) {
     const [weight, setWeight] = React.useState(set.weight);
     const [reps, setReps] = React.useState(set.reps);
+    //true - октрытие сразу в режиме редактирования -false - нет
     const [editing, setEditing] = React.useState(false);
 
     function handleSubmit(event) {
@@ -13,20 +18,31 @@ export default function ExerciseSetList({ set, onUpdate, onDelete }) {
         setEditing(false);
     }
 
+
+    function handleWeightChange({ target: { value }}) {
+        setWeight(Number(value)); // == target.value
+    }
+
+    function handleRepsChange({ target: { value }}) {
+        setReps(Number(value));
+    }
+
     return (
         <li>
             {editing ? 
-                <form className="exercise-set-edit-form" onSubmit={handleSubmit}>
+                <form className="exercise-set-form" onSubmit={handleSubmit}>
                     <input 
-                        value={weight} 
-                        onChange={({ target: { value } }) => setWeight(value)} 
-                    /> кг. 
-
+                        value={weight}
+                        placeholder="Вес" 
+                        onChange={handleWeightChange} 
+                    />
                     <input 
-                        value={reps} 
-                        onChange={({ target: { value } }) => setReps(value)}
-                     /> повторы
+                        value={reps}
+                        placeholder="Количество повторений" 
+                        onChange={handleRepsChange}
+                    /> 
 
+                    <div className="buttons">
                     <Button 
                         type="submit" 
                         className="save icon" 
@@ -38,12 +54,27 @@ export default function ExerciseSetList({ set, onUpdate, onDelete }) {
                         icon="cancel" 
                         onClick={() => setEditing(false)} 
                     />
+                    </div>
                 </form>  
                 :
-                <div>
-                    {set.weight} кг. {set.reps} повторы
-                    <Button className="edit icon" icon="edit" onClick={() => setEditing(true)} />
-                    <Button className="delete icon" icon="delete" onClick={() => onDelete(set.id)} />
+                <div className="exercise-set-item">
+                    <div>
+                        <span>{set.weight || 0} кг.</span> 
+                        <span>{set.reps || 0} повторений</span>
+                    </div>
+                
+                    <div className ="buttons">
+                        <Button 
+                            className="edit icon" 
+                            icon="edit" 
+                            onClick={() => setEditing(true)} 
+                        />
+                        <Button 
+                            className="delete icon" 
+                            icon="delete" 
+                            onClick={() => onDelete(set.id)} 
+                        />
+                    </div>    
                 </div> 
             }
         </li>

@@ -60,6 +60,7 @@
 .exercise-set-list {
   list-style: none;
   margin: 0;
+  padding: 0;
   width: 100%;
 }
 .exercise-set-list li {
